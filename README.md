@@ -1,6 +1,6 @@
-# app8lojavirtual
+# App loja Virtual
 
-A new Flutter application.
+A new Flutter application. Another step in learning.
 
 ## Getting Started
 
