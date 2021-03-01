@@ -1,4 +1,4 @@
-import 'package:app8lojavirtual/ui/widgets/categoria_screen.dart';
+import 'package:app8lojavirtual/ui/telas/categoria_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

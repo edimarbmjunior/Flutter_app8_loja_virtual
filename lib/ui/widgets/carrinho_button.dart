@@ -1,4 +1,4 @@
-import 'package:app8lojavirtual/ui/widgets/carrinho_screen.dart';
+import 'package:app8lojavirtual/ui/telas/carrinho_screen.dart';
 import 'package:flutter/material.dart';
 
 class CarrinhoButton extends StatelessWidget {

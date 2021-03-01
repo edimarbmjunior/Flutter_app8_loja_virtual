@@ -1,8 +1,11 @@
 import 'package:app8lojavirtual/model/carrinho_model.dart';
 import 'package:app8lojavirtual/model/usuario_model.dart';
 import 'package:app8lojavirtual/ui/login_screen.dart';
+import 'package:app8lojavirtual/ui/telas/confirmacao_ordem_screen.dart';
 import 'package:app8lojavirtual/ui/tiles/card_tile.dart';
 import 'package:app8lojavirtual/ui/widgets/desconto_card.dart';
+import 'package:app8lojavirtual/ui/widgets/envio_card.dart';
+import 'package:app8lojavirtual/ui/widgets/preco_card.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -87,11 +90,20 @@ class CarrinhoScreen extends StatelessWidget {
                   children: <Widget>[
                     Column(
                       children: model.produtos.map((produto){
-                        print("produto->" + produto.toString());
-                        return CardTile(produto);
+                        // print("produto->" + produto.toString());
+                        return CardTile(produto, model.produtos.last);
                       }).toList(),
                     ),
                     DescontoCard(),
+                    EnvioCard(),
+                    PrecoCard(() async {
+                      String ordemId = await model.finlizacaoPedido();
+                      if(ordemId !=null){
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context)=>ConfirmacaoOrdemScreen(ordemId))
+                        );
+                      }
+                    }),
                   ],
                 );
               }

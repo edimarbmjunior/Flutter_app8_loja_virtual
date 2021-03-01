@@ -7,13 +7,18 @@ import 'package:flutter/material.dart';
 class CardTile extends StatelessWidget {
 
   final CarrinhoProduto carrinhoProduto;
+  final CarrinhoProduto carrinhoProdutoFinal;
 
-  CardTile(this.carrinhoProduto);
+  CardTile(this.carrinhoProduto, this.carrinhoProdutoFinal);
 
   @override
   Widget build(BuildContext context) {
 
     Widget _buildContent(){
+      if(carrinhoProduto == carrinhoProdutoFinal){
+        CarrinhoModel.of(context).updatePreco();//Isso é para atualizar os precos no card de resumo do pedido quando carregar os produtos do carrinho
+      }
+
       return Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -57,7 +62,7 @@ class CardTile extends StatelessWidget {
                       IconButton(
                           icon: Icon(Icons.remove),
                           color: Theme.of(context).primaryColor,
-                          onPressed: carrinhoProduto.qtdeItens > 0 ?
+                          onPressed: carrinhoProduto.qtdeItens > 1 ?
                               (){
                                 CarrinhoModel.of(context).decProduto(carrinhoProduto);
                               }

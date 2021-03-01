@@ -81,4 +81,67 @@ class CarrinhoModel extends Model {
     produtos = query.documents.map((doc) => CarrinhoProduto.fromDocument(doc)).toList();
     notifyListeners();
   }
+
+  void updatePreco(){
+    notifyListeners();
+  }
+
+  double getProdutoPreco(){
+    double preco = 0.0;
+    for(CarrinhoProduto c in produtos){
+      if(c.produtoDados != null){
+        preco += c.qtdeItens * c.produtoDados.preco;
+      }
+    }
+
+    return preco;
+  }
+
+  double getDescontoPreco(){
+    return getProdutoPreco() * descontoPorcento / 100;
+  }
+
+  double getEntregaPreco(){
+    return 9.99;
+  }
+
+  Future<String> finlizacaoPedido() async {
+    if(produtos.length == 0) return null;
+    isLoading = true;
+    notifyListeners();
+
+    double precoProdutos = getProdutoPreco();
+    double precoEntrega = getEntregaPreco();
+    double precoDesconto = getDescontoPreco();
+    
+    DocumentReference refOrder = await Firestore.instance.collection("ordemPedido").add({
+      "clienteId": user.firebaseUser.uid,
+      "produtos": produtos.map((carrinhoProduto)=> carrinhoProduto.toMap()).toList(),
+      "precoEntrega": precoEntrega,
+      "precoProdutos": precoProdutos,
+      "precoDesconto": precoDesconto,
+      "totalPedido": precoProdutos + precoEntrega - precoDesconto,
+      "status": 1
+    });
+
+    await Firestore.instance.collection("usuarios").document(user.firebaseUser.uid)
+      .collection("ordemPedido").document(refOrder.documentID).setData({
+      "ordemPedidoId": refOrder.documentID
+    });
+
+    QuerySnapshot query = await Firestore.instance.collection("usuarios")
+        .document(user.firebaseUser.uid)
+        .collection("carrinho").getDocuments();
+
+    for(DocumentSnapshot doc in query.documents){
+      doc.reference.delete();
+    }
+
+    produtos.clear();
+    descontoPorcento=0;
+    cupomDesconto=null;
+    isLoading = false;
+    notifyListeners();
+    return refOrder.documentID;
+  }
 }

@@ -34,7 +34,7 @@ class DescontoCard extends StatelessWidget {
                         CarrinhoModel.of(context).setCupom(text, docCupom.data["porcento"]);
                         Scaffold.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("Desconto de ${docCupom.data["cupom"]}% aplicado!"),
+                            content: Text("Desconto de ${docCupom.data["porcento"]}% aplicado!"),
                             backgroundColor: Theme.of(context).primaryColor,
                           )
                         );

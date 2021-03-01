@@ -3,7 +3,7 @@ import 'package:app8lojavirtual/dados/produto_dados.dart';
 import 'package:app8lojavirtual/model/carrinho_model.dart';
 import 'package:app8lojavirtual/model/usuario_model.dart';
 import 'package:app8lojavirtual/ui/login_screen.dart';
-import 'package:app8lojavirtual/ui/widgets/carrinho_screen.dart';
+import 'package:app8lojavirtual/ui/telas/carrinho_screen.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 
@@ -194,6 +194,8 @@ class _ProdutoScreenState extends State<ProdutoScreen> {
                           carrinhoProduto.qtdeItens = 1;
                           carrinhoProduto.produtoId = produto.id;
                           carrinhoProduto.categoriaProduto = produto.categoria;
+                          carrinhoProduto.produtoDados = produto;
+
                           CarrinhoModel.of(context).adicionaItem(carrinhoProduto);
 
                           Navigator.of(context).push(

@@ -1,4 +1,6 @@
 import 'package:app8lojavirtual/ui/tabs/home_tab.dart';
+import 'package:app8lojavirtual/ui/tabs/loja_tab.dart';
+import 'package:app8lojavirtual/ui/tabs/ordem_tab.dart';
 import 'package:app8lojavirtual/ui/tabs/produtos_tab.dart';
 import 'package:app8lojavirtual/ui/widgets/carrinho_button.dart';
 import 'package:app8lojavirtual/ui/widgets/custom_drawer.dart';
@@ -28,8 +30,22 @@ class HomeScreen extends StatelessWidget {
           body: ProdutosTab(),
           floatingActionButton: CarrinhoButton(),
         ),
-        Scaffold(),
-        Scaffold(),
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Lojas"),
+            centerTitle: true,
+          ),
+          body: LojasTab(),
+          drawer: CustomDrawer(_pageController),
+        ),
+        Scaffold(
+          appBar: AppBar(
+            title: Text("Meus Pedidos"),
+            centerTitle: true,
+          ),
+          body: OrdemTab(),
+          drawer: CustomDrawer(_pageController),
+        ),
       ],
     );
   }

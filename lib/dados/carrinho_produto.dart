@@ -27,7 +27,7 @@ class CarrinhoProduto{
       "produtoId": produtoId,
       "qtdeItens": qtdeItens,
       "tamanhoProduto": tamanhoProduto,
-      // "produtoDados": produtoDados.toResumeMap()
+      "produtoDados": produtoDados.toResumeMap()
     };
   }
 

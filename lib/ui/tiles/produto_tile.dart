@@ -1,5 +1,5 @@
 import 'package:app8lojavirtual/dados/produto_dados.dart';
-import 'package:app8lojavirtual/ui/widgets/produto_screen.dart';
+import 'package:app8lojavirtual/ui/telas/produto_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProdutoTile extends StatelessWidget {
